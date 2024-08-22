@@ -1,31 +1,3 @@
-# name: Lab3 Assignment Policy to RG
-
-# on: workflow_dispatch
-
-# env:
-#   POLICY_NAME: audit-tag-x-all-services
-
-# jobs:
-
-#   arm-template-deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       # Checkout code
-#     - uses: actions/checkout@main
-
-#       # Log into Azure
-#     - uses: azure/login@v1
-#       with:
-#         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-#     - name: Azure CLI script
-#       uses: azure/CLI@v1
-#       with:
-#         azcliversion: 2.30.0
-#         inlineScript: |
-#           az policy assignment create --name 'audit-all-tags' --scope "${{ secrets.SCOPE }}" --policy $POLICY_NAME -p './arm/lab3/policy_definition/azurepolicy.assing-parm.json'
-
-
 name: Lab3 Assignment Policy to RG
 
 on: workflow_dispatch
@@ -45,11 +17,6 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      # Create the policy definition if it doesn't exist
-    - name: Create Policy Definition
-      run: |
-        az policy definition create --name ${{ env.POLICY_NAME }} --rules './arm/lab3/policy_definition/azurepolicy.rules.json' --params './arm/lab3/policy_definition/azurepolicy.params.json'
 
     - name: Azure CLI script
       uses: azure/CLI@v1
